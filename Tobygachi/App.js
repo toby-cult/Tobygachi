@@ -1,41 +1,30 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Accelerometer, DeviceMotion } from "expo-sensors";
-import * as Font from 'expo-font';
+import * as Location from "expo-location";
+import * as TaskManager from "expo-task-manager";
+
+const nearestHundredth = (num) => {
+  return Math.round(num * 100) / 100;
+};
 
 export default function App() {
-  const [fontsLoaded] = useFonts({
-    'Baloo2': require('./assets/fonts/Baloo2-VariableFont_wght.ttf'),
-  });
-
-  const onLayoutRootView = useCallback(async () => {
-    if (fontsLoaded) {
-      await SplashScreen.hideAsync();
-    }
-  }, [fontsLoaded]);
-
-  const [{ x, y, z }, setData] = useState({
-    x: 0,
-    y: 0,
-    z: 0,
-  });
-  const [{ mX, mY, mZ }, setMData] = useState({
-    mX: 0,
-    mY: 0,
-    mZ: 0,
-  });
+  const [data, setData] = useState({});
+  const [mData, setMData] = useState({});
   const [accelerationSubscription, setAccelerationSubscription] =
     useState(null);
   const [motionSub, setMotionSub] = useState(null);
-  const [speed, setSpeed] = useState(0);
+  const [speed, setSpeed] = useState({});
+  const [speedData, setSpeedData] = useState([]);
+  let speedDifference = { x: 0, y: 0 };
 
   const _slow = () => {
     Accelerometer.setUpdateInterval(1000);
     DeviceMotion.setUpdateInterval(1000);
   };
   const _fast = () => {
-    Accelerometer.setUpdateInterval(16);
-    DeviceMotion.setUpdateInterval(16);
+    Accelerometer.setUpdateInterval(200);
+    DeviceMotion.setUpdateInterval(200);
   };
 
   const _subscribe = () => {
@@ -55,18 +44,81 @@ export default function App() {
     return () => _unsubscribe();
   }, []);
 
+  useEffect(() => {
+    if (mData.acceleration) {
+      let newData = speedData;
+      newData.push(mData.acceleration);
+      //console.log(mData.acceleration);
+      speedDifference.x += mData.acceleration.x;
+      speedDifference.y += mData.acceleration.y;
+      if (newData.length > 5) {
+        speedDifference.x -= newData[0].x;
+        speedDifference.y -= newData[0].y;
+        newData.shift();
+      }
+      //console.log(speedDifference);
+      setSpeed(speedDifference);
+      setSpeedData(newData);
+    }
+  }, [mData]);
+  /*const startLocationTracking = async () => {
+    await Location.startLocationUpdatesAsync("LOCATION_TRACKING", {
+      accuracy: Location.Accuracy.Highest,
+      timeInterval: 5000,
+      distanceInterval: 0,
+    });
+    const hasStarted = await Location.hasStartedLocationUpdatesAsync(
+      "LOCATION_TRACKING"
+    );
+    setLocationStarted(hasStarted);
+    console.log("tracking started?", hasStarted);
+  };
+
+  TaskManager.defineTask("LOCATION_TRACKING", async ({ data, error }) => {
+    if (error) {
+      console.log("LOCATION_TRACKING task ERROR:", error);
+      return;
+    }
+    if (data) {
+      Location.g;
+      const { locations } = data;
+      let lat = locations[0].coords.latitude;
+      let long = locations[0].coords.longitude;
+
+      l1 = lat;
+      l2 = long;
+      origin = lat + "," + long;
+      console.log(origin);
+    }
+  });*/
+
   return (
-    <View style={styles.container}>
-      <Text style={{ fontFamily: 'Baloo2', fontSize: 10 }}>Baloo2</Text>
+    <View
+      style={[
+        styles.container,
+        nearestHundredth(Math.pow(speed.x * speed.x + speed.y * speed.y, 0.5)) *
+          2.237 <
+        6.5
+          ? styles.green
+          : styles.red,
+      ]}
+    >
+      <Text style={{ fontSize: 32 }}>Baloo2</Text>
       <Text style={styles.text}>
-        Accelerometer: (in gs where 1g = 9.81 m/s^2)
+        Test Accelerometer: (in gs where 1g = 9.81 m/s^2)
       </Text>
-      <Text style={styles.text}>x: {x}</Text>
-      <Text style={styles.text}>y: {y}</Text>
-      <Text style={styles.text}>z: {z}</Text>
-      <Text style={styles.text}>mx: {mX}</Text>
-      <Text style={styles.text}>my: {mY}</Text>
-      <Text style={styles.text}>mz: {mZ}</Text>
+      <Text style={styles.text}>x: {data.x * 9.81}</Text>
+      <Text style={styles.text}>y: {data.y * 9.81}</Text>
+      <Text style={styles.text}>z: {data.z * 9.81}</Text>
+      <Text style={styles.text}>
+        mx: {mData.acceleration ? mData.acceleration.x : 0}
+      </Text>
+      <Text style={styles.text}>
+        my: {mData.acceleration ? mData.acceleration.y : 0}
+      </Text>
+      <Text style={styles.text}>
+        mz: {mData.acceleration ? mData.acceleration.z : 0}
+      </Text>
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           onPress={accelerationSubscription ? _unsubscribe : _subscribe}
@@ -83,7 +135,12 @@ export default function App() {
         <TouchableOpacity onPress={_fast} style={styles.button}>
           <Text>Fast</Text>
         </TouchableOpacity>
-        <Text>Speed: {Math.pow(x * x + y * y + z * z, 0.5)}</Text>
+        <Text>
+          Net Acceleration in the Past Second:{" "}
+          {nearestHundredth(
+            Math.pow(speed.x * speed.x + speed.y * speed.y, 0.5)
+          ) * 2.237}
+        </Text>
       </View>
     </View>
   );
@@ -95,5 +152,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+  },
+  green: {
+    backgroundColor: "green",
+  },
+  red: {
+    backgroundColor: "red",
   },
 });
