@@ -26,6 +26,7 @@ const MainScreen = ({ navigation }) => {
   const [motionSub, setMotionSub] = useState(null);
   const [speed, setSpeed] = useState({});
   const [speedData, setSpeedData] = useState([]);
+  const [drivingPoorly, setDrivingPoorly] = useState(false);
   let speedDifference = { x: 0, y: 0 };
   const [stats, setStats] = useState({
     suddenStops: 0,
@@ -72,12 +73,18 @@ const MainScreen = ({ navigation }) => {
       }
       if (speedDifference.x > 3) {
         currentStats.suddenAccelerations += 1;
+        setDrivingPoorly(true);
       } else if (speedDifference.x < -3) {
         currentStats.suddenStops += 1;
+        setDrivingPoorly(true);
       } else if (speedDifference.y > 3) {
         currentStats.suddenTurnRight += 1;
+        setDrivingPoorly(true);
       } else if (speedDifference.y < -3) {
         currentStats.suddenTurnLeft += 1;
+        setDrivingPoorly(true);
+      } else {
+        setDrivingPoorly(false);
       }
       setStats(currentStats);
       setSpeed(speedDifference);
@@ -86,7 +93,7 @@ const MainScreen = ({ navigation }) => {
   }, [mData]);
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, drivingPoorly ? styles.red : styles.green]}>
       <Text style={styles.text}>
         X (Front/ Rear):{" "}
         {nearestHundredth(mData.acceleration ? mData.acceleration.x : 0)}
@@ -99,6 +106,10 @@ const MainScreen = ({ navigation }) => {
         Z (Up/Down):{" "}
         {nearestHundredth(mData.acceleration ? mData.acceleration.z : 0)}
       </Text>
+      <Text>suddenAccelerations: {stats.suddenAccelerations}</Text>
+      <Text>suddenStops: {stats.suddenStops}</Text>
+      <Text>suddenTurnRight: {stats.suddenTurnRight}</Text>
+      <Text>suddenTurnLeft: {stats.suddenTurnLeft}</Text>
       <View style={styles.buttonContainer}>
         <Button
           title={motionSub ? "On" : "Off"}
