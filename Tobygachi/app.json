@@ -19,7 +19,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#ffffff"
       },
       "package": "com.theayu.Tobygachi"
@@ -29,7 +29,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": "d0214bc7-4ae2-4303-9bb9-2cc3643f70c4"
+        "projectId": "669c2ecc-31fe-472f-b598-9af3d3e4940c"
       }
     }
   }
