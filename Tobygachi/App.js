@@ -1,8 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Accelerometer, DeviceMotion } from "expo-sensors";
+import * as Font from 'expo-font';
 
 export default function App() {
+  const [fontsLoaded] = useFonts({
+    'Baloo2': require('./assets/fonts/Baloo2-VariableFont_wght.ttf'),
+  });
+
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
   const [{ x, y, z }, setData] = useState({
     x: 0,
     y: 0,
@@ -46,6 +57,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
+      <Text style={{ fontFamily: 'Baloo2', fontSize: 10 }}>Baloo2</Text>
       <Text style={styles.text}>
         Accelerometer: (in gs where 1g = 9.81 m/s^2)
       </Text>
