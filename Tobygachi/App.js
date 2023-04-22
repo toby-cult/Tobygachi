@@ -1,9 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Accelerometer, DeviceMotion } from "expo-sensors";
-import AppLoading from 'expo-app-loading';
-import { useFonts } from 'expo-font';
-
+import AppLoading from "expo-app-loading";
 import {
   useFonts,
   Baloo2_400Regular,
@@ -11,8 +9,11 @@ import {
   Baloo2_600SemiBold,
   Baloo2_700Bold,
   Baloo2_800ExtraBold,
-} from '@expo-google-fonts/baloo-2';
+} from "@expo-google-fonts/baloo-2";
 
+const nearestHundredth = (num) => {
+  return Math.round(num * 100) / 100;
+};
 
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -23,12 +24,12 @@ export default function App() {
     Baloo2_800ExtraBold,
   });
 
-  const [{ x, y, z }, setData] = useState({
+  const [data, setData] = useState({
     x: 0,
     y: 0,
     z: 0,
   });
-  const [{ mX, mY, mZ }, setMData] = useState({
+  const [mData, setMData] = useState({
     mX: 0,
     mY: 0,
     mZ: 0,
@@ -160,8 +161,8 @@ export default function App() {
         <Text>
           Net Acceleration in the Past Second:{" "}
           {nearestHundredth(
-            Math.pow(speed.x * speed.x + speed.y * speed.y, 0.5)
-          ) * 2.237}
+            Math.pow(speed.x * speed.x + speed.y * speed.y, 0.5) * 2.237
+          )}
         </Text>
       </View>
     </View>
@@ -171,7 +172,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    fontFamily: 'Baloo2_400Regular',
+    fontFamily: "Baloo2_400Regular",
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
