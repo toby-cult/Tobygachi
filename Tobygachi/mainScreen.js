@@ -1,27 +1,16 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Button, StyleSheet, Text, View } from "react-native";
 import { DeviceMotion } from "expo-sensors";
-import {
-  useFonts,
-  Baloo2_400Regular,
-  Baloo2_500Medium,
-  Baloo2_600SemiBold,
-  Baloo2_700Bold,
-  Baloo2_800ExtraBold,
-} from "@expo-google-fonts/baloo-2";
+import { useFonts } from 'expo-font';
 
 const nearestHundredth = (num) => {
   return Math.round(num * 100) / 100;
 };
 
 const MainScreen = ({ navigation }) => {
-  let [fontsLoaded] = useFonts({
-    Baloo2_400Regular,
-    Baloo2_500Medium,
-    Baloo2_600SemiBold,
-    Baloo2_700Bold,
-    Baloo2_800ExtraBold,
-  });
+
+  
+
   const [mData, setMData] = useState({});
   const [motionSub, setMotionSub] = useState(null);
   const [speed, setSpeed] = useState({});
@@ -106,10 +95,10 @@ const MainScreen = ({ navigation }) => {
         Z (Up/Down):{" "}
         {nearestHundredth(mData.acceleration ? mData.acceleration.z : 0)}
       </Text>
-      <Text>suddenAccelerations: {stats.suddenAccelerations}</Text>
-      <Text>suddenStops: {stats.suddenStops}</Text>
-      <Text>suddenTurnRight: {stats.suddenTurnRight}</Text>
-      <Text>suddenTurnLeft: {stats.suddenTurnLeft}</Text>
+      <Text style={styles.text}>suddenAccelerations: {stats.suddenAccelerations}</Text>
+      <Text style={styles.text}>suddenStops: {stats.suddenStops}</Text>
+      <Text style={styles.text}>suddenTurnRight: {stats.suddenTurnRight}</Text>
+      <Text style={styles.text}>suddenTurnLeft: {stats.suddenTurnLeft}</Text>
       <View style={styles.buttonContainer}>
         <Button
           title={motionSub ? "On" : "Off"}
@@ -129,9 +118,11 @@ const MainScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
+  text: {
+    fontFamily: 'Baloo2',
+  },
   container: {
     flex: 1,
-    fontFamily: "Baloo2_400Regular",
     backgroundColor: "#E7E2CC",
     alignItems: "center",
     justifyContent: "center",
