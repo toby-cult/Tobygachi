@@ -1,16 +1,38 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Accelerometer, DeviceMotion } from "expo-sensors";
-import * as Location from "expo-location";
-import * as TaskManager from "expo-task-manager";
+import AppLoading from 'expo-app-loading';
+import { useFonts } from 'expo-font';
 
-const nearestHundredth = (num) => {
-  return Math.round(num * 100) / 100;
-};
+import {
+  useFonts,
+  Baloo2_400Regular,
+  Baloo2_500Medium,
+  Baloo2_600SemiBold,
+  Baloo2_700Bold,
+  Baloo2_800ExtraBold,
+} from '@expo-google-fonts/baloo-2';
+
 
 export default function App() {
-  const [data, setData] = useState({});
-  const [mData, setMData] = useState({});
+  let [fontsLoaded] = useFonts({
+    Baloo2_400Regular,
+    Baloo2_500Medium,
+    Baloo2_600SemiBold,
+    Baloo2_700Bold,
+    Baloo2_800ExtraBold,
+  });
+
+  const [{ x, y, z }, setData] = useState({
+    x: 0,
+    y: 0,
+    z: 0,
+  });
+  const [{ mX, mY, mZ }, setMData] = useState({
+    mX: 0,
+    mY: 0,
+    mZ: 0,
+  });
   const [accelerationSubscription, setAccelerationSubscription] =
     useState(null);
   const [motionSub, setMotionSub] = useState(null);
@@ -149,6 +171,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    fontFamily: 'Baloo2_400Regular',
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
