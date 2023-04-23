@@ -8,8 +8,8 @@
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "resizeMode": "cover",
+      "backgroundColor": "#E7E2CC"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -20,7 +20,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "E7E2CC"
       },
       "package": "com.theayu.Tobygachi"
     },
