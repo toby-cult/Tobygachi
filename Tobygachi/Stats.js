@@ -51,14 +51,22 @@ const Stats = ({ navigation, route }) => {
   };
 
   console.log(route);
+  const numDate = new Date(route.params.date);
+  const stringdate = numDate.toDateString();
+  console.log(numDate);
+
   return (
     <View style={styles.container}>
       <Text style={styles.lastTrip}>Last Trip's Stats</Text>
-      <Text style={styles.subtitle}>{route.params.date}</Text>
-      <View style={{ flexDirection: "row", width: "100%" }}>
-        <GoodJob lastTrip={route.params.lastTrip} />
-        <Growth lastTrip={route.params.lastTrip} />
+      {stringdate !== "Invalid Date" ? 
+      <View>
+      <Text style={styles.subtitle}>{stringdate}</Text>
+        <View style={{ flexDirection: "row", width: "100%" }}>
+          <GoodJob lastTrip={route.params.lastTrip} />
+          <Growth lastTrip={route.params.lastTrip} />
+        </View>
       </View>
+      : <Text style={styles.subtitle}>You haven't drove with Toby yet!</Text> }
       <View style={styles.spacer} />
       <TouchableOpacity
         onPress={returnHomeLastTrip}
@@ -126,6 +134,7 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontSize: 24,
+    fontFamily: "Baloo2",
   },
 });
 
