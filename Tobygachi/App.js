@@ -47,7 +47,7 @@ const App = () => {
         <Stack.Screen
           name="Main Screen"
           component={MainScreen}
-          options={styles.header}
+          options={{ headerShown: false }}
         />
         <Stack.Screen name="Recap" component={Recap} options={styles.header} />
         <Stack.Screen name="Stats" component={Stats} options={styles.header} />
