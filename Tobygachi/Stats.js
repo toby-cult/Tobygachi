@@ -1,5 +1,6 @@
 import React from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 export const GoodJob = ({ lastTrip }) => {
   console.log(lastTrip);
@@ -64,6 +65,7 @@ const Stats = ({ navigation, route }) => {
         onPress={returnHomeLastTrip}
         style={styles.returnHomeButton}
       >
+        <Ionicons name="home" size={32} />
         <Text style={styles.returnHomeText}>Return Home</Text>
       </TouchableOpacity>
     </View>
@@ -111,15 +113,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#ACC172",
     borderRadius: 8,
+    flexDirection: "row",
     justifyContent: "center",
     margin: 32,
-    padding: 16,
+    padding: 8,
     width: "66.66%",
   },
   returnHomeText: {
     color: "#412716",
     fontSize: 24,
     fontFamily: "Baloo2",
+    margin: 8,
   },
   spacer: {
     flex: 1,
