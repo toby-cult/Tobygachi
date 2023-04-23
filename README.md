@@ -1,2 +1,2 @@
 # Tobygachi
-Your driving companion
+Your fuel-efficient driving companion!
