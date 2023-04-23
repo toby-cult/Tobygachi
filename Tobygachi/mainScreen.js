@@ -1,5 +1,12 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { Button, StyleSheet, Text, View } from "react-native";
+import {
+  Button,
+  ImageBackground,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { DeviceMotion } from "expo-sensors";
 
 const nearestHundredth = (num) => {
@@ -16,6 +23,7 @@ const MainScreen = ({ navigation, route }) => {
   const [speedData, setSpeedData] = useState([]);
   const [drivingPoorly, setDrivingPoorly] = useState(false);
   const [recentData, setRecentData] = useState(false);
+  const [displayData, setDisplayData] = useState(false);
   const [stats, setStats] = useState({
     suddenStops: 0,
     suddenAccelerations: 0,
@@ -157,57 +165,90 @@ const MainScreen = ({ navigation, route }) => {
 
   return (
     <View style={[styles.container, drivingPoorly ? styles.red : styles.green]}>
-      
-      <Text style={styles.text}>
-        X (Left/ Right):
-        {nearestHundredth(mData.acceleration ? mData.acceleration.x : 0)}
-      </Text>
-      <Text style={styles.text}>
-        Y (Up/Down):
-        {nearestHundredth(mData.acceleration ? mData.acceleration.y : 0)}
-      </Text>
-      <Text style={styles.text}>
-        Z (Backward/Forward):{" "}
-        {nearestHundredth(mData.acceleration ? mData.acceleration.z : 0)}
-      </Text>
-      <Text style={styles.text}>
-        suddenAccelerations: {stats.suddenAccelerations}
-      </Text>
-      <Text style={styles.text}>suddenStops: {stats.suddenStops}</Text>
-      <Text style={styles.text}>
-        goodAccelerations: {stats.goodAccelerations}
-      </Text>
-      <Text style={styles.text}>goodStops: {stats.goodStops}</Text>
-      <Text style={styles.text}>velocityX: {nearestHundredth(velocity.x)}</Text>
-      <Text style={styles.text}>velocityZ: {nearestHundredth(velocity.z)}</Text>
-      <Text style={styles.text}>
-        distanceTraveled: {nearestHundredth(distanceTraveled)}
-      </Text>
-      <View style={styles.buttonContainer}>
-        <Button
-          title={motionSub ? "On" : "Off"}
-          style={styles.button}
-          onPress={motionSub ? _unsubscribe : _subscribe}
-        />
-        <Button
-          title="Slow"
-          onPress={_slow}
-          style={[styles.button, styles.middleButton]}
-        />
-        <Button title="Fast" onPress={_fast} style={styles.button} />
-        <Button title="End Journey" onPress={endRoute} style={styles.button} />
-      </View>
+      <ImageBackground
+        source={require("./assets/main.png")}
+        style={styles.background}
+      >
+        {displayData ? (
+          <>
+            <Text style={styles.text}>
+              X (Left/ Right):
+              {nearestHundredth(mData.acceleration ? mData.acceleration.x : 0)}
+            </Text>
+            <Text style={styles.text}>
+              Y (Up/Down):
+              {nearestHundredth(mData.acceleration ? mData.acceleration.y : 0)}
+            </Text>
+            <Text style={styles.text}>
+              Z (Backward/Forward):{" "}
+              {nearestHundredth(mData.acceleration ? mData.acceleration.z : 0)}
+            </Text>
+            <Text style={styles.text}>
+              suddenAccelerations: {stats.suddenAccelerations}
+            </Text>
+            <Text style={styles.text}>suddenStops: {stats.suddenStops}</Text>
+            <Text style={styles.text}>
+              goodAccelerations: {stats.goodAccelerations}
+            </Text>
+            <Text style={styles.text}>goodStops: {stats.goodStops}</Text>
+            <Text style={styles.text}>
+              velocityX: {nearestHundredth(velocity.x)}
+            </Text>
+            <Text style={styles.text}>
+              velocityZ: {nearestHundredth(velocity.z)}
+            </Text>
+            <Text style={styles.text}>
+              distanceTraveled: {nearestHundredth(distanceTraveled)}
+            </Text>
+            <View>
+              <Button
+                title={motionSub ? "On" : "Off"}
+                style={styles.button}
+                onPress={motionSub ? _unsubscribe : _subscribe}
+              />
+              <Button
+                title="Slow"
+                onPress={_slow}
+                style={[styles.button, styles.middleButton]}
+              />
+              <Button
+                title="Fast"
+                onPress={_fast}
+                style={[styles.button, { width: "80%" }]}
+              />
+            </View>
+          </>
+        ) : (
+          <></>
+        )}
+        <TouchableOpacity onPress={endRoute} style={styles.endJourney}>
+          <Text style={styles.title}>End Trip</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={{ position: "absolute", bottom: 16, left: 16 }}
+          onPress={() => setDisplayData(!displayData)}
+        >
+          <Text>Toggle Display Data</Text>
+        </TouchableOpacity>
+      </ImageBackground>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  background: {
+    flex: 1,
+    width: "100%",
+    alignItems: "center",
+  },
   text: {
     fontFamily: "Baloo2",
+    margin: 8,
+    textAlign: "center",
   },
   container: {
-    flex: 1,
     backgroundColor: "#E7E2CC",
+    flex: 1,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -216,6 +257,21 @@ const styles = StyleSheet.create({
   },
   red: {
     backgroundColor: "red",
+  },
+  endJourney: {
+    alignItems: "center",
+    backgroundColor: "#E69EB4",
+    borderRadius: 8,
+    bottom: "10%",
+    justifyContent: "center",
+    padding: 6,
+    position: "absolute",
+    width: "50%",
+  },
+  title: {
+    color: "#412716",
+    fontSize: 32,
+    fontFamily: "Baloo2",
   },
 });
 
