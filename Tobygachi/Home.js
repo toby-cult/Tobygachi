@@ -8,6 +8,7 @@ import {
   View,
   Image,
 } from "react-native";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 const Home = ({ navigation, route }) => {
   const startRoute = () => {
@@ -35,14 +36,21 @@ const Home = ({ navigation, route }) => {
           style={styles.tobycar}
         >
           <View style={styles.flexContainer}>
+            <Ionicons
+              name="settings"
+              size={32}
+              style={{ padding: 8, position: "absolute", left: 8, top: -96 }}
+            />
             <Image
               source={require("./assets/cloud.gif")}
               style={styles.cloud}
             ></Image>
             <TouchableOpacity style={styles.button1} onPress={startRoute}>
+              <Ionicons name="car" size={32} style={{ padding: 8 }} />
               <Text style={styles.text}>Travel with Toby</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.button2}>
+              <Ionicons name="stats-chart" size={32} style={{ padding: 8 }} />
               <Text style={styles.text} onPress={viewStats}>
                 Stats
               </Text>
@@ -94,27 +102,30 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
   },
   button1: {
-    height: 50,
-    width: "66%",
     borderRadius: 8,
-    verticalAlign: "bottom",
+    padding: 4,
+    paddingRight: 12,
     fontFamily: "Baloo2",
     alignSelf: "center",
+    justifyContent: "center",
     textAlign: "center",
     textAlignVertical: "center",
     backgroundColor: "#ACC172",
     marginBottom: 20,
+    flexDirection: "row",
   },
 
   button2: {
-    height: 50,
-    width: "40%",
     borderRadius: 8,
+    padding: 4,
+    paddingRight: 12,
     fontFamily: "Baloo2",
     alignSelf: "center",
+    justifyContent: "center",
     textAlign: "center",
     textAlignVertical: "center",
     backgroundColor: "#ACC172",
+    flexDirection: "row",
   },
 });
 

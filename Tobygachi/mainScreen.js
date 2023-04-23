@@ -8,6 +8,7 @@ import {
   View,
 } from "react-native";
 import { DeviceMotion } from "expo-sensors";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 const nearestHundredth = (num) => {
   return Math.round(num * 100) / 100;
@@ -222,13 +223,18 @@ const MainScreen = ({ navigation, route }) => {
           <></>
         )}
         <TouchableOpacity onPress={endRoute} style={styles.endJourney}>
+          <Ionicons
+            name="close-circle-outline"
+            size={32}
+            style={{ padding: 8 }}
+          />
           <Text style={styles.title}>End Trip</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={{ position: "absolute", bottom: 16, left: 16 }}
           onPress={() => setDisplayData(!displayData)}
         >
-          <Text>Toggle Display Data</Text>
+          <Ionicons name="settings" size={32} style={{ padding: 8 }} />
         </TouchableOpacity>
       </ImageBackground>
     </View>
@@ -263,8 +269,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#E69EB4",
     borderRadius: 8,
     bottom: "10%",
+    flexDirection: "row",
     justifyContent: "center",
     padding: 6,
+    paddingRight: 20,
     position: "absolute",
     width: "50%",
   },
