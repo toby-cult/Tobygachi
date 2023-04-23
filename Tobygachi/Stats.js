@@ -140,6 +140,7 @@ const styles = StyleSheet.create({
   subtitle: {
     fontSize: 24,
     fontFamily: "Baloo2",
+    alignSelf:"center",
   },
 });
 

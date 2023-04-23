@@ -78,8 +78,7 @@ const Recap = ({ navigation, route }) => {
         style={{
           width: "75%",
           alignSelf: "center",
-          paddingTop: "5%",
-          height: "35%",
+          height: "30%",
         }}
       >
         <QuickTip></QuickTip>
@@ -115,8 +114,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
     textAlignVertical: "center",
     flexDirection: "row",
-    padding: 20,
-    marginTop: "10%",
+    padding: 15,
+    marginTop: "5%",
     margin: 8,
   },
   box: {
@@ -135,12 +134,13 @@ const styles = StyleSheet.create({
     fontSize: 24,
     color: "#412716",
     textAlign: "center",
-    lineHeight: 120,
+    lineHeight: 100,
   },
   qtip: {
     alignItems: "center",
     backgroundColor: "#BA9D63",
     borderRadius: 15,
+    marginTop: "5%",
     flex: 1,
     padding: 16,
     margin: 8,

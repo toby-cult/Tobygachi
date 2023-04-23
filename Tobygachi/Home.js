@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     textAlignVertical: "center",
     backgroundColor: "#ACC172",
-    marginBottom: 20,
+    marginBottom: 15,
     flexDirection: "row",
   },
 
