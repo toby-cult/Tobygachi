@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
   },
   button1: {
     borderRadius: 8,
-    padding: 4,
+    padding: 8,
     paddingRight: 12,
     fontFamily: "Baloo2",
     alignSelf: "center",
