@@ -66,18 +66,9 @@ const Recap = ({ navigation, route }) => {
         <GoodJob lastTrip={route.params.lastTrip} style={styles.box} />
         <Growth lastTrip={route.params.lastTrip} style={styles.box} />
       </View>
-      <View
-        style={{
-          width: "75%",
-          alignSelf: "center",
-          paddingTop: "5%",
-          height: "35%",
-        }}
-      >
-        <QuickTip></QuickTip>
-      </View>
-
+      <QuickTip></QuickTip>
       <TouchableOpacity style={styles.button1} onPress={returnHomeLastTrip}>
+        <Ionicons name="home" size={32} />
         <Text style={styles.text}>Return Home</Text>
       </TouchableOpacity>
     </View>
@@ -89,30 +80,29 @@ const styles = StyleSheet.create({
     fontFamily: "Baloo2",
     alignSelf: "center",
     color: "#412716",
-    fontSize: 32,
+    fontSize: 24,
   },
   text2: {
     fontFamily: "Baloo2",
     alignSelf: "center",
     color: "#412716",
-    fontSize: 30,
+    fontSize: 24,
     fontWeight: "500",
   },
   button1: {
-    height: 50,
-    width: "50%",
+    backgroundColor: "#ACC172",
     borderRadius: 8,
     fontFamily: "Baloo2",
     alignSelf: "center",
+    justifyContent: "center",
     textAlign: "center",
     textAlignVertical: "center",
-    backgroundColor: "#ACC172",
-    marginBottom: 20,
-    marginTop: "10%",
+    flexDirection: "row",
+    padding: 16,
+    margin: 8,
   },
   box: {
     alignSelf: "center",
-    paddingTop: 40,
     verticalAlign: "center",
   },
   recap: {
@@ -123,25 +113,24 @@ const styles = StyleSheet.create({
   },
   comment: {
     fontFamily: "Baloo2",
-    fontSize: 32,
+    fontSize: 24,
     color: "#412716",
     textAlign: "center",
-    padding: 8,
+    lineHeight: 40,
   },
   qtip: {
     alignItems: "center",
     backgroundColor: "#BA9D63",
     borderRadius: 15,
     flex: 1,
-    height: "100%",
-    margin: 16,
     padding: 16,
+    margin: 8,
   },
   tip: {
     fontFamily: "Baloo2",
     alignSelf: "center",
     color: "#412716",
-    fontSize: 20,
+    fontSize: 16,
   },
 });
 

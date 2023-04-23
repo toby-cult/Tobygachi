@@ -11,7 +11,7 @@ export const GoodJob = ({ lastTrip }) => {
     <View style={styles.goodJob}>
       <Text>Good Job!</Text>
       <Image
-        style={{ width: 64, height: 64, margin: 16 }}
+        style={{ width: 64, height: 64, margin: 8 }}
         source={require("./assets/tobyHappy.png")}
       />
       <Text style={styles.body}>{goodAccelerations} good starts</Text>
@@ -28,10 +28,10 @@ export const Growth = ({ lastTrip }) => {
     <View style={styles.growthAreas}>
       <Text>Growth Areas</Text>
       <Image
-        style={{ width: 64, height: 64, margin: 16 }}
+        style={{ width: 64, height: 64, margin: 8 }}
         source={require("./assets/tobySad.png")}
       />
-      <Text style={styles.body}>{suddenAccelerations} sudden acceleration</Text>
+      <Text style={styles.body}>{suddenAccelerations} sudden starts</Text>
       <Text style={styles.body}>{suddenStops} sudden stops</Text>
     </View>
   );
@@ -98,8 +98,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#ACC172",
     borderRadius: 15,
     flex: 1,
-    height: "100%",
-    margin: 16,
+    margin: 8,
     padding: 16,
   },
   growthAreas: {
@@ -107,14 +106,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#E69EB4",
     borderRadius: 15,
     flex: 1,
-    height: "100%",
-    margin: 16,
+    margin: 8,
     padding: 16,
   },
   lastTrip: {
     fontFamily: "Baloo2",
     fontSize: 40,
-    marginBottom: 32,
     textAlign: "center",
   },
   returnHomeButton: {
@@ -131,7 +128,7 @@ const styles = StyleSheet.create({
     color: "#412716",
     fontSize: 24,
     fontFamily: "Baloo2",
-    margin: 8,
+    margin: 16,
   },
   spacer: {
     flex: 1,
