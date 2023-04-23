@@ -50,7 +50,7 @@ const Recap = ({ navigation, route }) => {
 
   return (
     <View style={{ overflow: "auto" }}>
-      <Text style={styles.recap}>Journey's Recap</Text>
+      <Text style={styles.recap}>Journey Recap</Text>
       <View
         style={{
           borderTopColor: "#412716",

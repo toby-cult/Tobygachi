@@ -67,7 +67,7 @@ const Stats = ({ navigation, route }) => {
           <Growth lastTrip={route.params.lastTrip} />
         </View>
       </View>
-      : <Text style={styles.subtitle}>You haven't drove with Toby yet!</Text> }
+      : <Text style={styles.subtitle}>You haven't driven with Toby yet!</Text> }
       <View style={styles.spacer} />
       <TouchableOpacity
         onPress={returnHomeLastTrip}
