@@ -24,6 +24,7 @@ export const Growth = ({ lastTrip }) => {
   console.log(lastTrip);
   const suddenAccelerations = lastTrip ? lastTrip.suddenAccelerations : 0;
   const suddenStops = lastTrip ? lastTrip.suddenStops : 0;
+  const suddenTurn = lastTrip ? lastTrip.suddenTurn : 0;
   return (
     <View style={styles.growthAreas}>
       <Text>Growth Areas</Text>
@@ -33,6 +34,7 @@ export const Growth = ({ lastTrip }) => {
       />
       <Text style={styles.body}>{suddenAccelerations} sudden starts</Text>
       <Text style={styles.body}>{suddenStops} sudden stops</Text>
+      <Text style={styles.body}>{suddenTurn} sudden turns</Text>
     </View>
   );
 };
@@ -59,15 +61,17 @@ const Stats = ({ navigation, route }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.lastTrip}>Last Trip's Stats</Text>
-      {stringdate !== "Invalid Date" ? 
-      <View>
-      <Text style={styles.subtitle}>{stringdate}</Text>
-        <View style={{ flexDirection: "row", width: "100%" }}>
-          <GoodJob lastTrip={route.params.lastTrip} />
-          <Growth lastTrip={route.params.lastTrip} />
+      {stringdate !== "Invalid Date" ? (
+        <View>
+          <Text style={styles.subtitle}>{stringdate}</Text>
+          <View style={{ flexDirection: "row", width: "100%" }}>
+            <GoodJob lastTrip={route.params.lastTrip} />
+            <Growth lastTrip={route.params.lastTrip} />
+          </View>
         </View>
-      </View>
-      : <Text style={styles.subtitle}>You haven't driven with Toby yet!</Text> }
+      ) : (
+        <Text style={styles.subtitle}>You haven't driven with Toby yet!</Text>
+      )}
       <View style={styles.spacer} />
       <TouchableOpacity
         onPress={returnHomeLastTrip}

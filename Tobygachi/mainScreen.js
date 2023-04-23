@@ -29,8 +29,7 @@ const MainScreen = ({ navigation, route }) => {
   const [stats, setStats] = useState({
     suddenStops: 0,
     suddenAccelerations: 0,
-    suddenTurnRight: 0,
-    suddenTurnLeft: 0,
+    suddenTurn: 0,
     goodStops: 0,
     goodAccelerations: 0,
   });
@@ -115,7 +114,15 @@ const MainScreen = ({ navigation, route }) => {
         distanceTraveled + newDistance(timeInterval, velocity)
       );
       if (!recentData) {
-        if (speedDifference.z < -3) {
+        if (speedDifference.x > 3 || speedDifference.x < -3) {
+          currentStats.suddenTurn += 1;
+          setDrivingPoorly(1);
+          setRecentData(true);
+          setTimeout(() => {
+            console.log("Delay warnings");
+            setRecentData(false);
+          }, 1000);
+        } else if (speedDifference.z < -3) {
           currentStats.suddenStops += 1;
           setDrivingPoorly(1);
           setRecentData(true);
@@ -124,22 +131,6 @@ const MainScreen = ({ navigation, route }) => {
           }, 1000);
         } else if (speedDifference.z > 3) {
           currentStats.suddenAccelerations += 1;
-          setDrivingPoorly(1);
-          setRecentData(true);
-          setTimeout(() => {
-            console.log("Delay warnings");
-            setRecentData(false);
-          }, 1000);
-        } else if (speedDifference.x > 3) {
-          currentStats.suddenTurnRight += 1;
-          setDrivingPoorly(1);
-          setRecentData(true);
-          setTimeout(() => {
-            console.log("Delay warnings");
-            setRecentData(false);
-          }, 1000);
-        } else if (speedDifference.x < -3) {
-          currentStats.suddenTurnLeft += 1;
           setDrivingPoorly(1);
           setRecentData(true);
           setTimeout(() => {

@@ -16,8 +16,7 @@ const Recap = ({ navigation, route }) => {
   const {
     suddenStops,
     suddenAccelerations,
-    suddenTurnRight,
-    suddenTurnLeft,
+    suddenTurn,
     goodStops,
     goodAccelerations,
   } = route.params ? route.params.recapStats : defaultVal;
