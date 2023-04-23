@@ -29,9 +29,9 @@ const App = () => {
   console.log("Fonts Loaded: " + fontsLoaded);
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator >
         <Stack.Screen name="TOBYGACHI" component={Home} options={styles.header}/>
-        <Stack.Screen name="Main Screen" component={MainScreen} options={styles.header}/>
+        <Stack.Screen name="Main Screen" component={MainScreen} options={{headerShown: false}}/>
         <Stack.Screen name="Recap" component={Recap} options={styles.header}/>
       </Stack.Navigator>
     </NavigationContainer>
