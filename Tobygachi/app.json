@@ -20,7 +20,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
-        "backgroundColor": "E7E2CC"
+        "backgroundColor": "#E7E2CC"
       },
       "package": "com.theayu.Tobygachi"
     },
