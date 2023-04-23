@@ -1,11 +1,9 @@
-#Tobygachi
+# Tobygachi
 
 ## Inspiration
 On the drive up to LA, we were discussing topic ideas when TONY BRAKED REALLY REALLY HARD *cough cough*
 
 This reminded us of the Ford Fusion’s Efficiency Leaves feature, which gamifies the idea of fuel efficiency. The dashboard grows leaves and flowers when the vehicle reaches a certain level of fuel efficiencies, such as when users accelerate and brake smoothly. However, these leaves and flowers will die when the driver does “jackrabbit" starts, rapid acceleration, and hard braking, which can lower fuel economy by 15 to 30 percent at highway speeds and 10 to 40 percent in stop-and-go traffic.
-
-![Ford Fusion’s Efficiency Leaves](https://cdn.discordapp.com/attachments/763579631429222433/1099734964729286819/image.png&height=1274)
 
 For Ford Fusion users, when they grew the maximum number of flowers, they would have saved about $8,000 in fuel costs and 30 tons of CO2 over the life of the car. That’s a lot of savings, both monetary and environmental!
 
