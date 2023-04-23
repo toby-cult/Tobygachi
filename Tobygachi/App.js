@@ -42,7 +42,7 @@ const App = () => {
       await SplashScreen.preventAutoHideAsync();
       console.log("start splash");
       // pre-load your stuff
-      await new Promise((resolve) => setTimeout(resolve, 3000));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       console.log("end splash");
 
       // hide splash screen
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
   text: {
     fontFamily: "Baloo2",
     color: "#412716",
-    padding: 5,
+    padding: 10,
     fontSize: 32,
     fontWeight: "bold",
   },

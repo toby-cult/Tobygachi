@@ -70,7 +70,7 @@ const Recap = ({ navigation, route }) => {
           ? "Toby is proud of you!"
           : "There is always room for improvement!"}
       </Text>
-      <View style={{ flexDirection: "row", width: "100%" }}>
+      <View style={{ flexDirection: "row", width: "80%", alignSelf:"center" }}>
         <GoodJob lastTrip={route.params.recapStats} style={styles.box} />
         <Growth lastTrip={route.params.recapStats} style={styles.box} />
       </View>
@@ -102,8 +102,8 @@ const styles = StyleSheet.create({
   text2: {
     fontFamily: "Baloo2",
     alignSelf: "center",
-    color: "#412716",
-    fontSize: 24,
+    color: "#FFF",
+    fontSize: 32,
     fontWeight: "500",
   },
   button1: {
@@ -115,7 +115,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
     textAlignVertical: "center",
     flexDirection: "row",
-    padding: 16,
+    padding: 20,
+    marginTop: "10%",
     margin: 8,
   },
   box: {
@@ -125,6 +126,7 @@ const styles = StyleSheet.create({
   recap: {
     fontFamily: "Baloo2",
     fontSize: 40,
+    marginTop: "5%",
     color: "#412716",
     textAlign: "center",
   },
@@ -133,7 +135,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     color: "#412716",
     textAlign: "center",
-    lineHeight: 40,
+    lineHeight: 120,
   },
   qtip: {
     alignItems: "center",

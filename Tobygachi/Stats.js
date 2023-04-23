@@ -9,9 +9,9 @@ export const GoodJob = ({ lastTrip }) => {
   console.log(goodStops);
   return (
     <View style={styles.goodJob}>
-      <Text>Good Job!</Text>
+      <Text style={{color: "#FFF", fontWeight: "500"}} >Good Job!</Text>
       <Image
-        style={{ width: 64, height: 64, margin: 8 }}
+        style={{ width: 70, height: 64, margin: 8 }}
         source={require("./assets/tobyHappy.png")}
       />
       <Text style={styles.body}>{goodAccelerations} good starts</Text>
@@ -27,9 +27,9 @@ export const Growth = ({ lastTrip }) => {
   const suddenTurn = lastTrip ? lastTrip.suddenTurn : 0;
   return (
     <View style={styles.growthAreas}>
-      <Text>Growth Areas</Text>
+      <Text style={{color: "#FFF", fontWeight: "500"}} >Growth Areas</Text>
       <Image
-        style={{ width: 64, height: 64, margin: 8 }}
+        style={{ width: 70, height: 64, margin: 8 }}
         source={require("./assets/tobySad.png")}
       />
       <Text style={styles.body}>{suddenAccelerations} sudden starts</Text>
