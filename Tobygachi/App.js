@@ -5,30 +5,33 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import MainScreen from "./mainScreen";
 import Recap from "./recap";
 import Home from "./Home";
-import { useFonts } from 'expo-font';
-
+import { useFonts } from "expo-font";
 
 const Stack = createNativeStackNavigator();
 
 const App = () => {
   const [fontsLoaded] = useFonts({
-    'Baloo2': require('./assets/fonts/Baloo2-VariableFont_wght.ttf'),
+    Baloo2: require("./assets/fonts/Baloo2-VariableFont_wght.ttf"),
   });
 
-  console.log(fontsLoaded)
+  console.log("Fonts Loaded: " + fontsLoaded);
   return (
-    <NavigationContainer> 
+    <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Home" component={Home} style={styles.text}/>
-        <Stack.Screen name="Main Screen" component={MainScreen} style={styles.text}/>
-        <Stack.Screen name="Recap" component={Recap} style={styles.text}/>
+        <Stack.Screen name="Home" component={Home} style={styles.text} />
+        <Stack.Screen
+          name="Main Screen"
+          component={MainScreen}
+          style={styles.text}
+        />
+        <Stack.Screen name="Recap" component={Recap} style={styles.text} />
       </Stack.Navigator>
     </NavigationContainer>
   );
 };
 const styles = StyleSheet.create({
   text: {
-    fontFamily: 'Baloo2',
+    fontFamily: "Baloo2",
   },
 });
 

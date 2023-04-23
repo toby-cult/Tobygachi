@@ -16,6 +16,9 @@ const Recap = ({ navigation, route }) => {
       <Text style={styles.text}>{goodStops} good stops</Text>
       <Text style={styles.text}>{suddenAccelerations} sudden starts</Text>
       <Text style={styles.text}>{suddenStops} suddent stops</Text>
+      <Text style={styles.text}>
+        Distance Traveled: {route.params.distanceTraveled}
+      </Text>
     </View>
   );
 };
