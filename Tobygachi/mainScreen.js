@@ -182,14 +182,14 @@ const MainScreen = ({ navigation, route }) => {
         {drivingPoorly == 0 ? (
           <Image
             style={styles.toby}
-            source={require("./assets/tobyneutral.gif")}
+            source={require("./assets/tobyneutral1.gif")}
           />
         ) : drivingPoorly == 1 ? (
-          <Image style={styles.toby} source={require("./assets/tobysad.gif")} />
+          <Image style={styles.toby} source={require("./assets/tobysad1.gif")} />
         ) : (
           <Image
             style={styles.toby}
-            source={require("./assets/tobyhappy.gif")}
+            source={require("./assets/tobyhappy1.gif")}
           />
         )}
 
