@@ -1,12 +1,13 @@
-import * as React from "react";
+import React, { useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import { StyleSheet, Text, View, Image, StatusBar } from "react-native";
+import { StyleSheet, Text, View, Image } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import MainScreen from "./mainScreen";
 import Recap from "./recap";
 import Home from "./Home";
 import Stats from "./Stats";
 import { useFonts } from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
 
 const Stack = createNativeStackNavigator();
 
@@ -31,9 +32,24 @@ function HeaderLogo() {
 }
 
 const App = () => {
-  const [fontsLoaded] = useFonts({
+  const [fontsLoaded, error] = useFonts({
     Baloo2: require("./assets/fonts/Baloo2-VariableFont_wght.ttf"),
   });
+
+  useEffect(() => {
+    const prepare = async () => {
+      // keep splash screen visible
+      await SplashScreen.preventAutoHideAsync();
+      console.log("start splash");
+      // pre-load your stuff
+      await new Promise((resolve) => setTimeout(resolve, 3000));
+      console.log("end splash");
+
+      // hide splash screen
+      await SplashScreen.hideAsync();
+    };
+    prepare();
+  }, []);
 
   console.log("Fonts Loaded: " + fontsLoaded);
   return (
@@ -55,6 +71,7 @@ const App = () => {
     </NavigationContainer>
   );
 };
+
 const styles = StyleSheet.create({
   text: {
     fontFamily: "Baloo2",

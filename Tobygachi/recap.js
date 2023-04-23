@@ -24,10 +24,11 @@ const Recap = ({ navigation, route }) => {
   const QuickTip = () => {
     const tips = [
       "Cars are bad for the environment. Simply do not drive.",
-      "Increase your fuel efficiency by maintaining your car! Check your tires and use the correct oil and fuel to maximize your fuel economy.",
-      "Use the cruise control feature in your vehicle to minimize speed fluctuations!",
-      "Avoid idling your vehicle! A car engine consumes one quarter to one half gallon of fuel per hour when idling.",
-      "The fuel economy of a car affects the amount of greenhouse gasses the car emits.",
+      "Increase your fuel efficiency by maintaining your car! Check your tires and use the correct oil and fuel to maximize your fuel economy. (AAA)",
+      "Use the cruise control feature in your vehicle to minimize speed fluctuations! (AAA)",
+      "Avoid idling your vehicle! A car engine consumes one quarter to one half gallon of fuel per hour when idling. (AAA)",
+      "The fuel economy of a car affects the amount of greenhouse gasses the car emits. (Environmental Protection Agency)",
+      'Drive conservatively. Avoid "jack rabbit" starts, rapid acceleration and hard braking, which can lower fuel economy by 15 to 30 percent at highway speeds and 10 to 40 percent in stop-and-go traffic. (AAA)',
     ];
 
     const val = Math.floor(Math.random() * 5);
@@ -63,8 +64,8 @@ const Recap = ({ navigation, route }) => {
           : "There is always room for improvement!"}
       </Text>
       <View style={{ flexDirection: "row", width: "100%" }}>
-        <GoodJob lastTrip={route.params.lastTrip} style={styles.box} />
-        <Growth lastTrip={route.params.lastTrip} style={styles.box} />
+        <GoodJob lastTrip={route.params.recapStats} style={styles.box} />
+        <Growth lastTrip={route.params.recapStats} style={styles.box} />
       </View>
       <QuickTip></QuickTip>
       <TouchableOpacity style={styles.button1} onPress={returnHomeLastTrip}>

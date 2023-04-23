@@ -86,6 +86,11 @@ const MainScreen = ({ navigation, route }) => {
   };
 
   useEffect(() => {
+    _subscribe();
+    return () => _unsubscribe();
+  }, []);
+
+  useEffect(() => {
     if (mData.acceleration) {
       let newData = speedData;
       let currentStats = stats;
@@ -158,8 +163,7 @@ const MainScreen = ({ navigation, route }) => {
               console.log("Delay warnings");
               setRecentData(false);
             }, 1000);
-          }
-          else {
+          } else {
             setDrivingPoorly(0);
           }
         }
@@ -175,23 +179,20 @@ const MainScreen = ({ navigation, route }) => {
         source={require("./assets/main.png")}
         style={styles.background}
       >
-        
-        {drivingPoorly == 0? 
-        <Image
-          style={styles.toby}
-          source={require("./assets/tobyneutral.gif")}
-          />: drivingPoorly == 1 ? 
+        {drivingPoorly == 0 ? (
           <Image
-          style={styles.toby}
-          source={require("./assets/tobysad.gif")}
-          />:
-          <Image
-          style={styles.toby}
-          source={require("./assets/tobyhappy.gif")}
+            style={styles.toby}
+            source={require("./assets/tobyneutral.gif")}
           />
-        }
-        
-        
+        ) : drivingPoorly == 1 ? (
+          <Image style={styles.toby} source={require("./assets/tobysad.gif")} />
+        ) : (
+          <Image
+            style={styles.toby}
+            source={require("./assets/tobyhappy.gif")}
+          />
+        )}
+
         {displayData ? (
           <>
             <Text style={styles.text}>
@@ -244,9 +245,6 @@ const MainScreen = ({ navigation, route }) => {
         ) : (
           <></>
         )}
-        
-        
-      
 
         <TouchableOpacity onPress={endRoute} style={styles.endJourney}>
           <Ionicons
@@ -273,11 +271,11 @@ const styles = StyleSheet.create({
     width: "100%",
     alignItems: "center",
   },
-  toby:{
-    position:"absolute",
-    bottom:"15%",
-    width: "80%", 
-    height: "50%"
+  toby: {
+    position: "absolute",
+    bottom: "15%",
+    width: "80%",
+    height: "50%",
   },
   text: {
     fontFamily: "Baloo2",
