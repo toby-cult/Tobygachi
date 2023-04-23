@@ -58,7 +58,9 @@ const styles = StyleSheet.create({
   text: {
     fontFamily: "Baloo2",
     alignSelf: "center",
+    color:"#412716",
     fontSize: 32,
+    fontWeight:"400"
   },
   container: {
     flex: 1,

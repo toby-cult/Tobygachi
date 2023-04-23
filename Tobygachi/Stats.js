@@ -30,8 +30,8 @@ export const Growth = ({ lastTrip }) => {
         style={{ width: 64, height: 64, margin: 16 }}
         source={require("./assets/tobySad.png")}
       />
-      <Text style={styles.body}>{suddenAccelerations} good starts</Text>
-      <Text style={styles.body}>{suddenStops} good stops</Text>
+      <Text style={styles.body}>{suddenAccelerations} sudden acceleration</Text>
+      <Text style={styles.body}>{suddenStops} sudden stops</Text>
     </View>
   );
 };
