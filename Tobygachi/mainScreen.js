@@ -157,6 +157,7 @@ const MainScreen = ({ navigation, route }) => {
 
   return (
     <View style={[styles.container, drivingPoorly ? styles.red : styles.green]}>
+      
       <Text style={styles.text}>
         X (Left/ Right):
         {nearestHundredth(mData.acceleration ? mData.acceleration.x : 0)}
