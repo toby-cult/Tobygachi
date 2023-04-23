@@ -36,11 +36,6 @@ const Home = ({ navigation, route }) => {
           style={styles.tobycar}
         >
           <View style={styles.flexContainer}>
-            <Ionicons
-              name="settings"
-              size={32}
-              style={{ padding: 8, position: "absolute", left: 8, top: -96 }}
-            />
             <Image
               source={require("./assets/cloud.gif")}
               style={styles.cloud}

@@ -6,6 +6,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Image,
 } from "react-native";
 import { DeviceMotion } from "expo-sensors";
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -22,7 +23,7 @@ const MainScreen = ({ navigation, route }) => {
   const [velocity, setVelocity] = useState({ x: 0, z: 0 });
   const [distanceTraveled, setDistanceTraveled] = useState(0);
   const [speedData, setSpeedData] = useState([]);
-  const [drivingPoorly, setDrivingPoorly] = useState(false);
+  const [drivingPoorly, setDrivingPoorly] = useState(0);
   const [recentData, setRecentData] = useState(false);
   const [displayData, setDisplayData] = useState(false);
   const [stats, setStats] = useState({
@@ -111,14 +112,14 @@ const MainScreen = ({ navigation, route }) => {
       if (!recentData) {
         if (speedDifference.z < -3) {
           currentStats.suddenStops += 1;
-          setDrivingPoorly(true);
+          setDrivingPoorly(1);
           setRecentData(true);
           setTimeout(() => {
             setRecentData(false);
           }, 1000);
         } else if (speedDifference.z > 3) {
           currentStats.suddenAccelerations += 1;
-          setDrivingPoorly(true);
+          setDrivingPoorly(1);
           setRecentData(true);
           setTimeout(() => {
             console.log("Delay warnings");
@@ -126,7 +127,7 @@ const MainScreen = ({ navigation, route }) => {
           }, 1000);
         } else if (speedDifference.x > 3) {
           currentStats.suddenTurnRight += 1;
-          setDrivingPoorly(true);
+          setDrivingPoorly(1);
           setRecentData(true);
           setTimeout(() => {
             console.log("Delay warnings");
@@ -134,7 +135,7 @@ const MainScreen = ({ navigation, route }) => {
           }, 1000);
         } else if (speedDifference.x < -3) {
           currentStats.suddenTurnLeft += 1;
-          setDrivingPoorly(true);
+          setDrivingPoorly(1);
           setRecentData(true);
           setTimeout(() => {
             console.log("Delay warnings");
@@ -144,6 +145,7 @@ const MainScreen = ({ navigation, route }) => {
           if (isGoodAcceleration(speedData, speedDifference)) {
             currentStats.goodAccelerations += 1;
             setRecentData(true);
+            setDrivingPoorly(2);
             setTimeout(() => {
               console.log("Delay warnings");
               setRecentData(false);
@@ -151,12 +153,15 @@ const MainScreen = ({ navigation, route }) => {
           } else if (isGoodDeceleration(speedData, speedDifference)) {
             currentStats.goodStops += 1;
             setRecentData(true);
+            setDrivingPoorly(2);
             setTimeout(() => {
               console.log("Delay warnings");
               setRecentData(false);
             }, 1000);
           }
-          setDrivingPoorly(false);
+          else {
+            setDrivingPoorly(0);
+          }
         }
       }
       setStats(currentStats);
@@ -165,11 +170,28 @@ const MainScreen = ({ navigation, route }) => {
   }, [mData]);
 
   return (
-    <View style={[styles.container, drivingPoorly ? styles.red : styles.green]}>
+    <View style={styles.container}>
       <ImageBackground
         source={require("./assets/main.png")}
         style={styles.background}
       >
+        
+        {drivingPoorly == 0? 
+        <Image
+          style={styles.toby}
+          source={require("./assets/tobyneutral.gif")}
+          />: drivingPoorly == 1 ? 
+          <Image
+          style={styles.toby}
+          source={require("./assets/tobysad.gif")}
+          />:
+          <Image
+          style={styles.toby}
+          source={require("./assets/tobyhappy.gif")}
+          />
+        }
+        
+        
         {displayData ? (
           <>
             <Text style={styles.text}>
@@ -222,6 +244,10 @@ const MainScreen = ({ navigation, route }) => {
         ) : (
           <></>
         )}
+        
+        
+      
+
         <TouchableOpacity onPress={endRoute} style={styles.endJourney}>
           <Ionicons
             name="close-circle-outline"
@@ -246,6 +272,12 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "100%",
     alignItems: "center",
+  },
+  toby:{
+    position:"absolute",
+    bottom:"15%",
+    width: "80%", 
+    height: "50%"
   },
   text: {
     fontFamily: "Baloo2",
