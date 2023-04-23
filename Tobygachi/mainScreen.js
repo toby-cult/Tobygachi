@@ -56,11 +56,9 @@ const MainScreen = ({ navigation, route }) => {
   };
 
   const endRoute = () => {
+    console.log("trying to end route");
     navigation.navigate("Recap", {
       recapStats: stats,
-      /*
-      distanceTraveled: distanceTraveled,
-      */
     });
   };
 
@@ -187,7 +185,10 @@ const MainScreen = ({ navigation, route }) => {
             source={require("./assets/tobyneutral1.gif")}
           />
         ) : drivingPoorly == 1 ? (
-          <Image style={styles.toby} source={require("./assets/tobysad1.gif")} />
+          <Image
+            style={styles.toby}
+            source={require("./assets/tobysad1.gif")}
+          />
         ) : (
           <Image
             style={styles.toby}

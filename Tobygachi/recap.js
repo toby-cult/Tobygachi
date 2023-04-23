@@ -5,6 +5,14 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 
 const Recap = ({ navigation, route }) => {
   console.log(route);
+  const defaultVal = {
+    suddenStops: 0,
+    suddenAccelerations: 0,
+    suddenTurnRight: 0,
+    suddenTurnLeft: 0,
+    goodStops: 0,
+    goodAccelerations: 0,
+  };
   const {
     suddenStops,
     suddenAccelerations,
@@ -12,7 +20,7 @@ const Recap = ({ navigation, route }) => {
     suddenTurnLeft,
     goodStops,
     goodAccelerations,
-  } = route.params.recapStats;
+  } = route.params ? route.params.recapStats : defaultVal;
 
   const returnHomeLastTrip = () => {
     navigation.navigate("TOBYGACHI", {
@@ -49,7 +57,7 @@ const Recap = ({ navigation, route }) => {
   };
 
   return (
-    <View style={{ overflow: "auto" }}>
+    <View>
       <Text style={styles.recap}>Journey Recap</Text>
       <View
         style={{
@@ -67,7 +75,16 @@ const Recap = ({ navigation, route }) => {
         <GoodJob lastTrip={route.params.recapStats} style={styles.box} />
         <Growth lastTrip={route.params.recapStats} style={styles.box} />
       </View>
-      <QuickTip></QuickTip>
+      <View
+        style={{
+          width: "75%",
+          alignSelf: "center",
+          paddingTop: "5%",
+          height: "35%",
+        }}
+      >
+        <QuickTip></QuickTip>
+      </View>
       <TouchableOpacity style={styles.button1} onPress={returnHomeLastTrip}>
         <Ionicons name="home" size={32} />
         <Text style={styles.text}>Return Home</Text>
