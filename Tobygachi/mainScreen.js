@@ -58,7 +58,9 @@ const MainScreen = ({ navigation, route }) => {
   const endRoute = () => {
     navigation.navigate("Recap", {
       recapStats: stats,
+      /*
       distanceTraveled: distanceTraveled,
+      */
     });
   };
 
